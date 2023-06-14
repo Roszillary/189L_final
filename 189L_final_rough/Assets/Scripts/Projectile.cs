@@ -42,5 +42,15 @@ public class Projectile : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if(collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<EnemyController>().TakeDamage(20);
+            //Destroy(collision.gameObject);
+            this.gameObject.SetActive(false);
+        }
+    }
 
 }

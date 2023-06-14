@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
     private IPlayerCommand fire1;
     private IPlayerCommand fire2;
     private IPlayerCommand fire3;
+    private IPlayerCommand Q;
+    
+    [SerializeField] public HealthBarController healthBar;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float health;
 
     private Rigidbody2D body;
 
@@ -25,6 +30,9 @@ public class PlayerController : MonoBehaviour
         this.fire1 = this.GetComponent<PlayerAttack1>();
         this.fire2 = this.GetComponent<PlayerAttack2>();
         this.fire3 = this.GetComponent<PlayerAttack3>();
+        this.Q = this.GetComponent<PlayerMelee1>();
+
+        this.healthBar.SetMaxHealth(health);
 
         this.isGrounded = true;
     }
@@ -56,6 +64,21 @@ public class PlayerController : MonoBehaviour
         {
             this.fire3.Execute(this.gameObject);
         }
+        if(Input.GetKey(KeyCode.Q))
+        {
+            this.Q.Execute(this.gameObject);
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        this.health -= damage;
+        this.healthBar.SetHealth(this.health);
+
+        if(this.health <= 0.0f)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -67,5 +90,4 @@ public class PlayerController : MonoBehaviour
             this.isGrounded = true;
         }
     }
-
 }
