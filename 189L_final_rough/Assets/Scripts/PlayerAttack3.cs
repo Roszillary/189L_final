@@ -6,62 +6,64 @@ using Player.Command;
 
 namespace Player.Command
 {
-    public class PlayerAttack2 : MonoBehaviour, IPlayerCommand
+    public class PlayerAttack3 : MonoBehaviour, IPlayerCommand
     {
         [SerializeField] private float damage;
         [SerializeField] private float cooldown;
         [SerializeField] private float projectileSpeed;
         [SerializeField] private Transform projPoint;
         [SerializeField] private GameObject[] projectiles;
-        [SerializeField] private float burstCooldown;
 
         private GameObject player;
+        private Transform playerPosition;
 
         private float cooldownTimer;
         private float direction;
 
-        private float burstCooldownTimer;
-        private int burstIter;
-        private bool bursting;
+        private int sprayIter;
+        private bool spraying;
 
         void Start()
         {
             this.cooldownTimer = Mathf.Infinity;
             this.direction = 1.0f;
 
-            this.burstCooldownTimer = Mathf.Infinity;
-            this.burstIter = 0;
-            this.bursting = false;
+            this.sprayIter = 0;
+            this.spraying = false;
         }
 
         void Update()
         {
             this.cooldownTimer += Time.deltaTime;
-            this.burstCooldownTimer += Time.deltaTime;
             
-            if(this.burstIter >= 3)
+            if(this.sprayIter >= 3)
             {
-                this.bursting = false;
+                this.spraying = false;
             }
 
-            if(this.burstCooldownTimer >= this.burstCooldown && this.bursting == true)
+            if(this.spraying == true)
             {
-                this.burstCooldownTimer = 0.0f;
-                this.burstIter++;
+                this.sprayIter++;
+
+                var spread = 0;
+                if(this.sprayIter == 1)
+                    spread = 1;
+                else if(this.sprayIter == 2)
+                    spread = -1;
 
                 SetDirection();
-                var playerPosition = this.player.transform.position;
+                var playerPosition = this.playerPosition.position;
                 var projIndex = FindProjectile();
 
                 if(this.direction > 0)
                 {
-                    projectiles[projIndex].transform.position = new Vector2(projPoint.position.x, projPoint.position.y);
-                    projectiles[projIndex].GetComponent<Projectile>().Fire(1.0f * projectileSpeed, 0.0f);
+                    projectiles[projIndex].transform.position = new Vector2(projPoint.position.x, projPoint.position.y + spread);
+                    projectiles[projIndex].GetComponent<Projectile>().Fire(1.0f * projectileSpeed, spread * projectileSpeed * 5);
                 }
                 else if(this.direction < 0)
                 {
-                    projectiles[projIndex].transform.position = new Vector2(playerPosition.x - (projPoint.position.x - playerPosition.x), projPoint.position.y);
-                    projectiles[projIndex].GetComponent<Projectile>().Fire(-1.0f * projectileSpeed, 0.0f);
+                    projectiles[projIndex].transform.position = new Vector2(playerPosition.x - (projPoint.position.x - playerPosition.x), projPoint.position.y + spread);
+                    projectiles[projIndex].GetComponent<Projectile>().Fire(-1.0f * projectileSpeed, spread * projectileSpeed * 5);
                 }
 
             }
@@ -72,9 +74,10 @@ namespace Player.Command
             if(this.cooldownTimer >= this.cooldown)
             {
                 this.cooldownTimer = 0.0f;
-                this.burstIter = 0;
-                this.bursting = true;
+                this.sprayIter = 0;
+                this.spraying = true;
 
+                this.playerPosition = gameObject.transform;
                 this.player = gameObject;
             }
         }

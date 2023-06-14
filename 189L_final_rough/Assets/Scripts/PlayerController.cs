@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private IPlayerCommand jump;
     private IPlayerCommand fire1;
     private IPlayerCommand fire2;
+    private IPlayerCommand fire3;
 
     private Rigidbody2D body;
 
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
         this.jump = ScriptableObject.CreateInstance<MoveCharacterJump>();
         this.fire1 = this.GetComponent<PlayerAttack1>();
         this.fire2 = this.GetComponent<PlayerAttack2>();
+        this.fire3 = this.GetComponent<PlayerAttack3>();
 
         this.isGrounded = true;
     }
@@ -49,6 +51,10 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButton(1))
         {
             this.fire2.Execute(this.gameObject);
+        }
+        if(Input.GetMouseButton(2))
+        {
+            this.fire3.Execute(this.gameObject);
         }
     }
 

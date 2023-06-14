@@ -1159,6 +1159,37 @@ Transform:
   m_Father: {fileID: 1936221178}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1330349606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1330349607}
+  m_Layer: 0
+  m_Name: MeleePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1330349607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330349606}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1936221178}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1538287398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,6 +1731,7 @@ GameObject:
   - component: {fileID: 1936221181}
   - component: {fileID: 1936221182}
   - component: {fileID: 1936221183}
+  - component: {fileID: 1936221184}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1772,6 +1804,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1295111669}
+  - {fileID: 1330349607}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1848,6 +1881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   cooldown: 0.5
+  projectileSpeed: 1
   projPoint: {fileID: 1295111669}
   projectiles:
   - {fileID: 2088878740}
@@ -1873,7 +1907,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   cooldown: 2
-  burstCooldown: 0.5
+  projectileSpeed: 2
+  projPoint: {fileID: 1295111669}
+  projectiles:
+  - {fileID: 2088878740}
+  - {fileID: 605468156}
+  - {fileID: 384465716}
+  - {fileID: 29225384}
+  - {fileID: 1538287398}
+  - {fileID: 1729800839}
+  - {fileID: 769082081}
+  - {fileID: 1753635378}
+  - {fileID: 1265565461}
+  burstCooldown: 0.2
+--- !u!114 &1936221184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936221176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2cf47c294b3c34ab8f75a6fb56be17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
+  cooldown: 2
+  projectileSpeed: 2
   projPoint: {fileID: 1295111669}
   projectiles:
   - {fileID: 2088878740}

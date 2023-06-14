@@ -10,49 +10,68 @@ namespace Player.Command
     {
         [SerializeField] private float damage;
         [SerializeField] private float cooldown;
+        [SerializeField] private float projectileSpeed;
         [SerializeField] private Transform projPoint;
         [SerializeField] private GameObject[] projectiles;
+
+        private GameObject player;
 
         private float cooldownTimer;
         private float direction;
 
+        private bool shooting;
+        
         void Start()
         {
-            cooldownTimer = Mathf.Infinity;
-            direction = 1.0f;
+            this.cooldownTimer = Mathf.Infinity;
+            this.direction = 1.0f;
+
+            this.shooting = false;
         }
 
         void Update()
         {
-            cooldownTimer += Time.deltaTime;
-        }
+            this.cooldownTimer += Time.deltaTime;
 
-        public void Execute(GameObject gameObject)
-        {
-            if(cooldownTimer >= cooldown)
+            if(this.shooting)
             {
-                cooldownTimer = 0.0f;
+                SetDirection();
+                var playerPosition = this.player.transform.position;
                 var projIndex = FindProjectile();
 
-                var rigidBody = gameObject.GetComponent<Rigidbody2D>();
-                var velocity = rigidBody.velocity;
-                var right = gameObject.transform.right;
-                float dotProduct = Vector2.Dot(velocity.normalized, right);
-                if(dotProduct != 0.0f) this.direction = dotProduct;
-
-                var playerPosition = gameObject.transform.position;
-                
                 if(this.direction > 0)
                 {
                     projectiles[projIndex].transform.position = new Vector2(projPoint.position.x, projPoint.position.y);
-                    projectiles[projIndex].GetComponent<Projectile>().Fire(1.0f);
+                    projectiles[projIndex].GetComponent<Projectile>().Fire(1.0f * projectileSpeed, 0.0f);
                 }
                 else if(this.direction < 0)
                 {
                     projectiles[projIndex].transform.position = new Vector2(playerPosition.x - (projPoint.position.x - playerPosition.x), projPoint.position.y);
-                    projectiles[projIndex].GetComponent<Projectile>().Fire(-1.0f);
+                    projectiles[projIndex].GetComponent<Projectile>().Fire(-1.0f * projectileSpeed, 0.0f);
                 }
+
+                this.shooting = false;
             }
+        }
+
+        public void Execute(GameObject gameObject)
+        {
+            if(this.cooldownTimer >= this.cooldown)
+            {
+                this.cooldownTimer = 0.0f;
+                this.shooting = true;
+
+                this.player = gameObject;
+            }
+        }
+
+        private void SetDirection()
+        {
+            var rigidBody = this.player.GetComponent<Rigidbody2D>();
+            var velocity = rigidBody.velocity;
+            var right = this.player.transform.right;
+            float dotProduct = Vector2.Dot(velocity.normalized, right);
+            if(dotProduct != 0.0f) this.direction = dotProduct;
         }
 
         private int FindProjectile()
