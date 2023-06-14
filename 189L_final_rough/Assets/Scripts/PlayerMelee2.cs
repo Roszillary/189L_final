@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player.Command
 {
-    public class PlayerMelee1 : MonoBehaviour, IPlayerCommand
+    public class PlayerMelee2 : MonoBehaviour, IPlayerCommand
     {
         [SerializeField] private float damage;
         [SerializeField] private float cooldown;
@@ -18,7 +18,7 @@ namespace Player.Command
         private float cooldownTimer;
         private float direction;
 
-        private bool slashing;
+        private bool bashing;
         
 
         void Start()
@@ -26,41 +26,39 @@ namespace Player.Command
             this.cooldownTimer = Mathf.Infinity;
             this.direction = 1.0f;
 
-            this.slashing = false;
+            this.bashing = false;
         }
 
         void Update()
         {
             this.cooldownTimer += Time.deltaTime;
 
-            if(this.slashing)
+            if(this.bashing)
             {
-                Debug.Log("Slash");
+                Debug.Log("Stun");
                 SetDirection();
                 var playerPosition = this.player.transform.position;
 
                 if(this.direction > 0)
                 {
-                    Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(this.center.position, this.radius, this.Enemy);
+                    Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(this.center.position, new Vector2(this.radius, this.radius), 0, this.Enemy);
                     foreach (var enemy in enemiesHit)
                     {
-                        
                         enemy.GetComponent<EnemyController>().TakeDamage(this.damage);
                     }
                 }
                 else if(this.direction < 0)
                 {
-                   
                     var centerPosition = new Vector2(playerPosition.x - (this.center.position.x - playerPosition.x), this.center.position.y);
-                    Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(centerPosition, this.radius, this.Enemy);
+                    Collider2D[] enemiesHit = Physics2D.OverlapBoxAll(centerPosition, new Vector2(this.radius, this.radius), 0, this.Enemy);
                     foreach (var enemy in enemiesHit)
                     {
-                        
+                        //Destroy(enemy.gameObject);
                         enemy.GetComponent<EnemyController>().TakeDamage(this.damage);
                     }
                 }
 
-                this.slashing = false;
+                this.bashing = false;
             }
         }
         
@@ -70,7 +68,7 @@ namespace Player.Command
             if(this.cooldownTimer >= this.cooldown)
             {
                 this.cooldownTimer = 0.0f;
-                this.slashing = true;
+                this.bashing = true;
 
                 this.player = gameObject;
             }

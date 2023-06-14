@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private IPlayerCommand fire2;
     private IPlayerCommand fire3;
     private IPlayerCommand Q;
+    private IPlayerCommand E;
     
     [SerializeField] public HealthBarController healthBar;
     [SerializeField] private float maxHealth;
@@ -30,9 +31,13 @@ public class PlayerController : MonoBehaviour
         this.fire1 = this.GetComponent<PlayerAttack1>();
         this.fire2 = this.GetComponent<PlayerAttack2>();
         this.fire3 = this.GetComponent<PlayerAttack3>();
-        this.Q = this.GetComponent<PlayerMelee1>();
+        //this.Q = this.GetComponent<PlayerMelee1>();
+        //this.Q = this.GetComponent<PlayerSpecial1>();
+        this.Q = this.GetComponent<PlayerSpecial2>();
+        this.E = this.GetComponent<PlayerMelee2>();
 
-        this.healthBar.SetMaxHealth(health);
+        this.healthBar.SetMaxHealth(maxHealth);
+        this.healthBar.SetHealth(0.0f);
 
         this.isGrounded = true;
     }
@@ -68,6 +73,10 @@ public class PlayerController : MonoBehaviour
         {
             this.Q.Execute(this.gameObject);
         }
+        if(Input.GetKey(KeyCode.E))
+        {
+            this.E.Execute(this.gameObject);
+        }
     }
 
     public void TakeDamage(float damage)
@@ -79,6 +88,14 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void Heal(float healAmount)
+    {
+        this.health += healAmount;
+        if(this.health > this.maxHealth)
+            this.health = this.maxHealth;
+        this.healthBar.SetHealth(this.health);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
