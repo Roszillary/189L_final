@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour
     void SetAbility()
     {
         //Debug.Log((this.currentAbility, this.currentAbilities));
+        // Generate enemy abilities based on players.
         if(this.currentAbilities == 1)
         {
             switch (this.currentAbility)
