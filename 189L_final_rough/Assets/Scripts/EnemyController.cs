@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
 
     private float maxHealth;
     private float health;
-    private IEnemyCommand ability;
+    //private IEnemyCommand ability;
     [SerializeField] private float cooldown;
     private float cooldownTimer;
 
@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
         this.maxHealth = 100.0f;
         this.health = 100.0f;
 
-        this.ability = this.GetComponent<EnemyCounter1>();
+        //this.ability = this.GetComponent<EnemyCounter1>();
 
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
         {
             this.cooldownTimer = 0.0f;
 
-            this.ability.Execute(this.gameObject);
+            //this.ability.Execute(this.gameObject);
         }
     }
 

@@ -7,10 +7,10 @@ namespace Enemy.Command
 {
     public class EnemyCounter1 : MonoBehaviour, IEnemyCommand
     {
-        [SerializeField] private float damage;
-        [SerializeField] private float projectileSpeed;
-        [SerializeField] private Transform projPoint;
-        [SerializeField] private GameObject projectile;
+        //[SerializeField] private float damage;
+        //[SerializeField] private float projectileSpeed;
+        //[SerializeField] private Transform projPoint;
+        //[SerializeField] private GameObject projectile;
         // Start is called before the first frame update
         void Start()
         {
