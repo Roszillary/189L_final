@@ -3177,7 +3177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  cooldown: 1
+  cooldown: 0.5
   center: {fileID: 1330349607}
   radius: 0.5
   Enemy:
