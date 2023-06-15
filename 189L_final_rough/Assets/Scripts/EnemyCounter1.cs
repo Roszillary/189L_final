@@ -26,8 +26,8 @@ namespace Enemy.Command
         public void Execute(GameObject gameObject)
         {
             Debug.Log("Attack");
-            projectile.transform.position = new Vector2(projPoint.position.x, projPoint.position.y);
-            projectile.GetComponent<Projectile>().Fire(-1.0f * projectileSpeed, 0.0f);
+            //projectile.transform.position = new Vector2(projPoint.position.x, projPoint.position.y);
+            //projectile.GetComponent<Projectile>().Fire(-1.0f * projectileSpeed, 0.0f);
         }
     }
 }
