@@ -109,7 +109,7 @@ However, I had counter ideas listed below, and was in the process creating a ene
 
 ## Sources
 
-[2D tutorial series](https://www.youtube.com/watch?v=TcranVQUQ5U&list=PLgOEwFbvGm5o8hayFB6skAfa8Z-mw4dPV&index=1&ab_channel=Pandemonium)
-[2D melee](https://www.youtube.com/watch?v=I2Uo8eEmSFQ&t=394s&ab_channel=SunnyValleyStudio)
-[2D melee series](https://www.youtube.com/watch?v=1QfxdUpVh5I&list=PLA0C6X3bTBNBI9eZ3umNMj7zUS6-y9VZQ&ab_channel=Blackthornprod)
-[Healthbar](https://www.youtube.com/watch?v=BLfNP4Sc_iA&ab_channel=Brackeys)
+*[2D tutorial series](https://www.youtube.com/watch?v=TcranVQUQ5U&list=PLgOEwFbvGm5o8hayFB6skAfa8Z-mw4dPV&index=1&ab_channel=Pandemonium)
+*[2D melee](https://www.youtube.com/watch?v=I2Uo8eEmSFQ&t=394s&ab_channel=SunnyValleyStudio)
+*[2D melee series](https://www.youtube.com/watch?v=1QfxdUpVh5I&list=PLA0C6X3bTBNBI9eZ3umNMj7zUS6-y9VZQ&ab_channel=Blackthornprod)
+*[Healthbar](https://www.youtube.com/watch?v=BLfNP4Sc_iA&ab_channel=Brackeys)
